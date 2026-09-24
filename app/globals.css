@@ -36,6 +36,11 @@
 body {
   background: var(--background);
   color: var(--foreground);
+  /* 
+   * Perfectly mimics Chrome's 80% magnification setting without breaking 
+   * sub-pixel rendering or rem-to-px border radius conversions.
+   */
+  zoom: 80%;
   /* Use system font stack — swap for Google Font in Phase 4 polish */
   font-family:
     ui-sans-serif,
