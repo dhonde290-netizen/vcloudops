@@ -42,4 +42,4 @@ A simple REST API with three endpoints:
 
 ## Recording
 
-The recording will be uploaded after post-processing. Subscribe to [the calendar](/api/calendar.ics) or check back here.
+The recording will be uploaded after post-processing. Check back here later.

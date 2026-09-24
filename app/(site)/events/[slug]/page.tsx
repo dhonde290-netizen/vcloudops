@@ -109,13 +109,6 @@ export default async function EventDetailPage({ params }: Props) {
               Add to Calendar
               <CalendarPlus className="h-4 w-4 transition-transform group-hover:scale-110" />
             </a>
-            <a
-              href={`/api/calendar.ics`}
-              className="group flex items-center gap-2 rounded-full border border-white/60 bg-white/50 px-6 py-3 text-sm font-bold text-gray-800 shadow-sm backdrop-blur-md transition-all hover:-translate-y-1 hover:bg-white/80 hover:shadow-md focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:outline-none dark:border-white/10 dark:bg-black/50 dark:text-gray-200 dark:hover:bg-black/80"
-            >
-              Download .ics
-              <Download className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
-            </a>
           </div>
         </div>
       </ScrollFade>

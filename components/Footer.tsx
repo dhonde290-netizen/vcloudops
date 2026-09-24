@@ -132,14 +132,6 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            {/* ICS calendar subscribe link */}
-            <a
-              href="/api/calendar.ics"
-              className="group mt-6 flex items-start gap-2 text-sm font-medium text-gray-600 transition-colors hover:text-orange-600 sm:items-center dark:text-gray-400 dark:hover:text-orange-400"
-            >
-              <CalendarPlus className="mt-0.5 h-4 w-4 shrink-0 sm:mt-0" />
-              <span className="leading-tight sm:leading-normal">Subscribe to events</span>
-            </a>
           </div>
         </div>
 

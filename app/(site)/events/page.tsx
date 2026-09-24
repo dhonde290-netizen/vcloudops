@@ -99,14 +99,6 @@ export default function EventsPage() {
               Workshops, sessions, challenges, and meetups from AWS Cloud Club VIT Pune.
             </p>
           </div>
-
-          <a
-            href="/api/calendar.ics"
-            className="group inline-flex items-center gap-2 rounded-full bg-orange-100 px-6 py-3 text-sm font-semibold whitespace-nowrap text-orange-700 shadow-sm transition-all hover:bg-orange-200 hover:shadow focus:ring-2 focus:ring-orange-500 focus:outline-none dark:bg-orange-500/10 dark:text-orange-400 dark:hover:bg-orange-500/20"
-          >
-            <CalendarIcon className="h-5 w-5 transition-transform group-hover:scale-110 group-hover:-rotate-12" />
-            Subscribe to Calendar (.ics)
-          </a>
         </div>
       </ScrollReveal>
 
