@@ -7,20 +7,12 @@
  * Phase 1: Stub that returns a valid but empty ICS file.
  */
 import { NextResponse } from 'next/server';
+import { getAllEvents } from '@/lib/content';
+import { generateIcs } from '@/lib/ics';
 
 export async function GET() {
-  // Minimal valid ICS file — empty calendar
-  const ics = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//AWS Cloud Club VIT Pune//Events//EN',
-    'CALSCALE:GREGORIAN',
-    'METHOD:PUBLISH',
-    'X-WR-CALNAME:AWS Cloud Club VIT Pune Events',
-    'X-WR-TIMEZONE:Asia/Kolkata',
-    // TODO Phase 2: insert VEVENT blocks here from lib/ics.ts
-    'END:VCALENDAR',
-  ].join('\r\n');
+  const events = getAllEvents();
+  const ics = generateIcs(events);
 
   return new NextResponse(ics, {
     status: 200,

@@ -7,11 +7,54 @@
 
 import Link from 'next/link';
 import Logo from './Logo';
+import { CalendarPlus, ArrowUpRight } from 'lucide-react';
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+    </svg>
+  );
+}
+
+function LinkedinIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+      <rect x="2" y="9" width="4" height="12"></rect>
+      <circle cx="4" cy="4" r="2"></circle>
+    </svg>
+  );
+}
 
 /** Update these with the club's actual social media URLs */
 const SOCIAL_LINKS = [
-  { href: 'https://instagram.com', label: 'Instagram' },
-  { href: 'https://linkedin.com', label: 'LinkedIn' },
+  { href: 'https://instagram.com', label: 'Instagram', icon: InstagramIcon },
+  { href: 'https://linkedin.com', label: 'LinkedIn', icon: LinkedinIcon },
   // { href: 'https://twitter.com', label: 'Twitter' },
 ] as const;
 
@@ -20,34 +63,37 @@ const QUICK_LINKS = [
   { href: '/workshops', label: 'Workshops' },
   { href: '/guides', label: 'Guides' },
   { href: '/queries', label: 'Ask a Query' },
-  { href: '/join', label: 'Join the Club' },
 ] as const;
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <footer className="relative mt-10 border-t border-gray-200 bg-white/50 backdrop-blur-xl dark:border-white/10 dark:bg-black/50">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
           {/* Brand column */}
-          <div className="space-y-4">
+          <div className="col-span-2 space-y-6">
             <Link
               href="/"
-              className="flex items-center gap-2"
+              className="group flex items-center gap-3 transition-opacity hover:opacity-90"
               aria-label="AWS Cloud Club VIT Pune — home"
             >
-              <Logo size={32} />
-              <span className="font-bold text-gray-900 dark:text-white">AWS Cloud Club</span>
+              <div className="rounded-xl bg-orange-100 p-2 shadow-inner transition-transform duration-300 group-hover:scale-110 dark:bg-orange-500/20">
+                <Logo size={32} />
+              </div>
+              <span className="text-xl font-black tracking-tight text-gray-900 dark:text-white">
+                AWS Cloud Club
+              </span>
             </Link>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="max-w-sm text-sm leading-relaxed font-medium text-gray-500 dark:text-gray-400">
               VIT Pune&apos;s official AWS Cloud Club — building cloud skills, one workshop at a
               time.
             </p>
           </div>
 
           {/* Quick links column */}
-          <nav aria-label="Footer navigation">
+          <nav className="col-span-1" aria-label="Footer navigation">
             <h2 className="mb-4 text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
               Quick Links
             </h2>
@@ -66,38 +112,44 @@ export default function Footer() {
           </nav>
 
           {/* Social + subscribe column */}
-          <div>
+          <div className="col-span-1">
             <h2 className="mb-4 text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
               Connect
             </h2>
-            <ul className="space-y-2" role="list">
-              {SOCIAL_LINKS.map(({ href, label }) => (
+            <ul className="space-y-3" role="list">
+              {SOCIAL_LINKS.map(({ href, label, icon: Icon }) => (
                 <li key={href}>
                   <a
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-gray-600 transition-colors hover:text-orange-600 dark:text-gray-400 dark:hover:text-orange-400"
+                    className="group flex items-center gap-2 text-sm font-medium text-gray-600 transition-colors hover:text-orange-600 dark:text-gray-400 dark:hover:text-orange-400"
                   >
-                    {label} ↗
+                    <Icon className="h-4 w-4 shrink-0" />
+                    <span>{label}</span>
+                    <ArrowUpRight className="hidden h-3 w-3 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100 sm:block" />
                   </a>
                 </li>
               ))}
             </ul>
-            {/* ICS calendar subscribe link — populated in Phase 2 */}
+            {/* ICS calendar subscribe link */}
             <a
               href="/api/calendar.ics"
-              className="mt-4 inline-block text-sm text-gray-600 transition-colors hover:text-orange-600 dark:text-gray-400 dark:hover:text-orange-400"
+              className="group mt-6 flex items-start gap-2 text-sm font-medium text-gray-600 transition-colors hover:text-orange-600 sm:items-center dark:text-gray-400 dark:hover:text-orange-400"
             >
-              📅 Subscribe to events calendar
+              <CalendarPlus className="mt-0.5 h-4 w-4 shrink-0 sm:mt-0" />
+              <span className="leading-tight sm:leading-normal">Subscribe to events</span>
             </a>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-10 border-t border-gray-200 pt-6 dark:border-gray-800">
-          <p className="text-center text-xs text-gray-500 dark:text-gray-400">
-            © {currentYear} AWS Cloud Club, VIT Pune. Built by the club team.
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/20 pt-6 sm:flex-row dark:border-white/10">
+          <p className="text-center text-sm font-medium text-gray-500 sm:text-left dark:text-gray-400">
+            © {currentYear} AWS Cloud Club, VIT Pune.
+          </p>
+          <p className="flex items-center gap-1.5 text-center text-sm font-medium text-gray-500 sm:text-left dark:text-gray-400">
+            Built by the club team.
           </p>
         </div>
       </div>

@@ -23,14 +23,14 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      // Next.js needs 'unsafe-eval' in dev; remove it in production manually or via env
-      "script-src 'self' 'unsafe-inline'",
+      // Next.js needs 'unsafe-eval' in dev for React to reconstruct callstacks.
+      `script-src 'self' 'unsafe-inline' ${process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : ''}`,
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob: https:",
       "connect-src 'self'",
       // Phase 3: add Supabase URL here when queries feature is built
-      "frame-src 'none'",
+      "frame-src 'self' https://www.youtube.com",
     ].join('; '),
   },
 ];

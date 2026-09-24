@@ -12,16 +12,26 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import Logo from './Logo';
+import {
+  Home,
+  Calendar,
+  Wrench,
+  Megaphone,
+  BookOpen,
+  Users,
+  HelpCircle,
+  X,
+  Menu,
+} from 'lucide-react';
 
-/** Edit this list to add / remove / rename nav links. */
 const NAV_LINKS = [
-  { href: '/events', label: 'Events' },
-  { href: '/workshops', label: 'Workshops' },
-  { href: '/updates', label: 'Updates' },
-  { href: '/guides', label: 'Guides' },
-  { href: '/team', label: 'Team' },
-  { href: '/join', label: 'Join' },
-  { href: '/queries', label: 'Ask a Query' },
+  { href: '/', label: 'Home', icon: Home },
+  { href: '/events', label: 'Events', icon: Calendar },
+  { href: '/workshops', label: 'Workshops', icon: Wrench },
+  { href: '/updates', label: 'Updates', icon: Megaphone },
+  { href: '/guides', label: 'Guides', icon: BookOpen },
+  { href: '/team', label: 'Team', icon: Users },
+  { href: '/queries', label: 'Ask a Query', icon: HelpCircle },
 ] as const;
 
 export default function Navbar() {
@@ -29,111 +39,44 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/95">
-      <nav
-        className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8"
-        aria-label="Main navigation"
+    <div className="pointer-events-none sticky top-4 z-50 mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+      <header
+        className={`pointer-events-auto border border-white/40 bg-white/40 shadow-lg backdrop-blur-xl transition-all dark:border-white/10 dark:bg-black/40 ${
+          menuOpen ? 'rounded-2xl' : 'rounded-full'
+        }`}
       >
-        {/* Logo + site name */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-lg font-bold text-gray-900 dark:text-white"
-          aria-label="AWS Cloud Club VIT Pune — home"
+        <nav
+          className="flex items-center justify-between px-4 py-3 sm:px-6"
+          aria-label="Main navigation"
         >
-          <Logo size={32} />
-          <span className="hidden sm:block">AWS Cloud Club</span>
-          <span className="sm:hidden">ACC</span>
-        </Link>
+          {/* Logo + site name */}
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-base font-bold text-gray-900 dark:text-white"
+            aria-label="AWS Cloud Club VIT Pune — home"
+          >
+            <Logo size={24} />
+            <span className="tracking-tight">AWS Cloud Club</span>
+          </Link>
 
-        {/* Desktop links */}
-        <ul className="hidden items-center gap-1 md:flex" role="list">
-          {NAV_LINKS.map(({ href, label }) => {
-            const isActive = pathname === href || pathname.startsWith(href + '/');
-            return (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className={[
-                    'rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                    isActive
-                      ? 'bg-orange-50 text-orange-600 dark:bg-orange-950 dark:text-orange-400'
-                      : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white',
-                  ].join(' ')}
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  {label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-
-        {/* Mobile hamburger */}
-        <button
-          type="button"
-          className="rounded-md p-2 text-gray-600 hover:bg-gray-100 md:hidden dark:text-gray-300 dark:hover:bg-gray-800"
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
-          onClick={() => setMenuOpen((prev) => !prev)}
-        >
-          {menuOpen ? (
-            // X icon
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          ) : (
-            // Hamburger icon
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          )}
-        </button>
-      </nav>
-
-      {/* Mobile menu dropdown */}
-      {menuOpen && (
-        <div
-          id="mobile-menu"
-          className="border-t border-gray-200 bg-white md:hidden dark:border-gray-800 dark:bg-gray-950"
-        >
-          <ul className="space-y-1 px-4 py-3" role="list">
+          {/* Desktop links */}
+          <ul className="hidden items-center gap-1 md:flex" role="list">
             {NAV_LINKS.map(({ href, label }) => {
-              const isActive = pathname === href || pathname.startsWith(href + '/');
+              const isActive =
+                href === '/'
+                  ? pathname === '/'
+                  : pathname === href || pathname.startsWith(href + '/');
               return (
                 <li key={href}>
                   <Link
                     href={href}
                     className={[
-                      'block rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                      'rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
                       isActive
-                        ? 'bg-orange-50 text-orange-600 dark:bg-orange-950 dark:text-orange-400'
-                        : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800',
+                        ? 'bg-white/60 text-orange-600 shadow-sm dark:bg-white/10 dark:text-orange-400'
+                        : 'text-gray-700 transition-colors hover:bg-white/50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-white/10 dark:hover:text-white',
                     ].join(' ')}
                     aria-current={isActive ? 'page' : undefined}
-                    onClick={() => setMenuOpen(false)}
                   >
                     {label}
                   </Link>
@@ -141,8 +84,57 @@ export default function Navbar() {
               );
             })}
           </ul>
-        </div>
-      )}
-    </header>
+
+          {/* Mobile hamburger */}
+          <button
+            type="button"
+            className="rounded-full p-2 text-gray-700 transition-colors hover:bg-white/50 md:hidden dark:text-gray-300 dark:hover:bg-white/10"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMenuOpen((prev) => !prev)}
+          >
+            {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </nav>
+
+        {/* Mobile menu dropdown */}
+        {menuOpen && (
+          <div
+            id="mobile-menu"
+            className="border-t border-white/40 bg-transparent md:hidden dark:border-white/10"
+          >
+            <ul className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-3" role="list">
+              {NAV_LINKS.map(({ href, label, icon: Icon }) => {
+                const isActive =
+                  href === '/'
+                    ? pathname === '/'
+                    : pathname === href || pathname.startsWith(href + '/');
+                return (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      className={[
+                        'flex flex-col items-center justify-center gap-2 rounded-xl p-4 text-sm transition-all active:scale-95',
+                        isActive
+                          ? 'bg-orange-100/80 text-orange-600 shadow-sm dark:bg-orange-500/20 dark:text-orange-400'
+                          : 'bg-white/40 text-gray-700 shadow-sm hover:bg-white/60 hover:text-gray-900 dark:bg-white/5 dark:text-gray-300 dark:hover:bg-white/10 dark:hover:text-white',
+                      ].join(' ')}
+                      aria-current={isActive ? 'page' : undefined}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      <Icon className="h-6 w-6" strokeWidth={isActive ? 2.5 : 2} />
+                      <span className="text-[11px] font-bold tracking-wider uppercase">
+                        {label}
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </header>
+    </div>
   );
 }
