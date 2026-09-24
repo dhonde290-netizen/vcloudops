@@ -173,15 +173,6 @@ export default function TeamPage() {
           </ul>
         </section>
       )}
-
-      {/* Join CTA */}
-      <div className="mt-14 rounded-xl border border-orange-200 bg-orange-50 p-6 text-center dark:border-orange-800 dark:bg-orange-950">
-        <p className="font-semibold text-gray-900 dark:text-white">Want to be on this page?</p>
-        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-          We recruit new core members every academic year. Stay active, contribute, and watch for
-          the announcement!
-        </p>
-      </div>
     </div>
   );
 }
