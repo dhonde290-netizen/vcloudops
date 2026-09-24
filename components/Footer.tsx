@@ -70,7 +70,7 @@ export default function Footer() {
 
   return (
     <footer className="relative mt-10 border-t border-gray-200 bg-white/50 backdrop-blur-xl dark:border-white/10 dark:bg-black/50">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
           {/* Brand column */}
           <div className="col-span-2 space-y-6">
@@ -144,7 +144,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/20 pt-6 sm:flex-row dark:border-white/10">
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/20 pt-4 sm:flex-row dark:border-white/10">
           <p className="text-center text-sm font-medium text-gray-500 sm:text-left dark:text-gray-400">
             © {currentYear} AWS Cloud Club, VIT Pune.
           </p>
