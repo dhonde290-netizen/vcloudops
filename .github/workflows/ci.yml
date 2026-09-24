@@ -1,0 +1,55 @@
+name: CI
+
+# Run on every pull request to main, and on pushes to main.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  ci:
+    name: Lint · Typecheck · Build
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the code
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Install pnpm (must match packageManager field in package.json)
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12
+
+      # 3. Set up Node.js with pnpm cache for faster installs
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      # 4. Install dependencies (frozen lockfile = reproducible builds)
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 5. ESLint — fails on any lint error
+      - name: Lint
+        run: pnpm lint
+
+      # 6. TypeScript — fails on any type error
+      - name: Typecheck
+        run: pnpm typecheck
+
+      # 7. Prettier format check — fails if any file is not formatted
+      - name: Format check
+        run: pnpm format:check
+
+      # 8. Next.js build — fails on any build error
+      # NEXT_PUBLIC_SITE_URL is needed at build time for metadata
+      - name: Build
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://vcloudops.vercel.app
+          # Phase 3: add Supabase env vars here when the queries feature is built
