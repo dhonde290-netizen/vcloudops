@@ -42,7 +42,7 @@ export default function QueryForm() {
               type="text"
               id="name"
               required
-              className="block w-full rounded-2xl border-gray-200 bg-white/50 py-3 pr-4 pl-12 text-gray-900 placeholder:text-gray-500 focus:border-orange-500 focus:ring-orange-500 sm:text-sm dark:border-gray-700 dark:bg-gray-950/50 dark:text-white dark:focus:border-orange-400 dark:focus:ring-orange-400"
+              className="block w-full rounded-2xl border-white/50 bg-white/50 py-3 pr-4 pl-12 text-gray-900 shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] placeholder:text-gray-500 focus:border-orange-500 focus:ring-orange-500 sm:text-sm dark:border-white/10 dark:bg-black/20 dark:text-white dark:shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)] dark:focus:border-orange-500/50 dark:focus:ring-orange-500/50"
               placeholder="John Doe"
             />
           </div>
@@ -60,7 +60,7 @@ export default function QueryForm() {
               type="email"
               id="email"
               required
-              className="block w-full rounded-2xl border-gray-200 bg-white/50 py-3 pr-4 pl-12 text-gray-900 placeholder:text-gray-500 focus:border-orange-500 focus:ring-orange-500 sm:text-sm dark:border-gray-700 dark:bg-gray-950/50 dark:text-white dark:focus:border-orange-400 dark:focus:ring-orange-400"
+              className="block w-full rounded-2xl border-white/50 bg-white/50 py-3 pr-4 pl-12 text-gray-900 shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] placeholder:text-gray-500 focus:border-orange-500 focus:ring-orange-500 sm:text-sm dark:border-white/10 dark:bg-black/20 dark:text-white dark:shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)] dark:focus:border-orange-500/50 dark:focus:ring-orange-500/50"
               placeholder="john@example.com"
             />
           </div>
@@ -79,7 +79,7 @@ export default function QueryForm() {
             id="topic"
             required
             defaultValue=""
-            className="block w-full appearance-none rounded-2xl border-gray-200 bg-white/50 py-3 pr-4 pl-12 text-gray-900 placeholder:text-gray-500 focus:border-orange-500 focus:ring-orange-500 sm:text-sm dark:border-gray-700 dark:bg-gray-950/50 dark:text-white dark:focus:border-orange-400 dark:focus:ring-orange-400"
+            className="block w-full appearance-none rounded-2xl border-white/50 bg-white/50 py-3 pr-4 pl-12 text-gray-900 shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] placeholder:text-gray-500 focus:border-orange-500 focus:ring-orange-500 sm:text-sm dark:border-white/10 dark:bg-black/20 dark:text-white dark:shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)] dark:focus:border-orange-500/50 dark:focus:ring-orange-500/50"
           >
             <option value="" disabled>
               Select a topic...
@@ -104,7 +104,7 @@ export default function QueryForm() {
             id="message"
             required
             rows={5}
-            className="block w-full rounded-2xl border-gray-200 bg-white/50 py-3 pr-4 pl-12 text-gray-900 placeholder:text-gray-500 focus:border-orange-500 focus:ring-orange-500 sm:text-sm dark:border-gray-700 dark:bg-gray-950/50 dark:text-white dark:focus:border-orange-400 dark:focus:ring-orange-400"
+            className="block w-full rounded-2xl border-white/50 bg-white/50 py-3 pr-4 pl-12 text-gray-900 shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] placeholder:text-gray-500 focus:border-orange-500 focus:ring-orange-500 sm:text-sm dark:border-white/10 dark:bg-black/20 dark:text-white dark:shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)] dark:focus:border-orange-500/50 dark:focus:ring-orange-500/50"
             placeholder="How can I get my AWS Educate account approved?"
           />
         </div>

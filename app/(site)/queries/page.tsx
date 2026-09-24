@@ -42,13 +42,13 @@ export default function QueriesPage() {
           {/* Info Section (Left) */}
           <ScrollReveal className="h-full lg:col-span-2">
             <div className="flex h-full flex-col justify-between gap-8">
-              <div className="rounded-3xl border border-gray-200/50 bg-white/40 p-8 backdrop-blur-xl dark:border-gray-800/50 dark:bg-gray-900/40">
+              <div className="group relative overflow-hidden rounded-3xl border border-white/80 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-3xl transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:border-white/10 dark:bg-white/[0.02] dark:shadow-[0_8px_30px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.05)] dark:hover:bg-white/[0.04]">
                 <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
                   How it works
                 </h2>
                 <div className="space-y-6">
                   <div className="flex gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-100 text-orange-600 dark:bg-orange-500/20 dark:text-orange-400">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-100/80 text-orange-600 shadow-[inset_0_0_0_1px_rgba(249,115,22,0.2)] dark:bg-orange-500/10 dark:text-orange-400 dark:shadow-[inset_0_0_0_1px_rgba(249,115,22,0.3)]">
                       <MessageSquare className="h-6 w-6" />
                     </div>
                     <div>
@@ -61,7 +61,7 @@ export default function QueriesPage() {
                     </div>
                   </div>
                   <div className="flex gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-100 text-orange-600 dark:bg-orange-500/20 dark:text-orange-400">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-100/80 text-orange-600 shadow-[inset_0_0_0_1px_rgba(249,115,22,0.2)] dark:bg-orange-500/10 dark:text-orange-400 dark:shadow-[inset_0_0_0_1px_rgba(249,115,22,0.3)]">
                       <Clock className="h-6 w-6" />
                     </div>
                     <div>
@@ -72,7 +72,7 @@ export default function QueriesPage() {
                     </div>
                   </div>
                   <div className="flex gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-100 text-orange-600 dark:bg-orange-500/20 dark:text-orange-400">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-100/80 text-orange-600 shadow-[inset_0_0_0_1px_rgba(249,115,22,0.2)] dark:bg-orange-500/10 dark:text-orange-400 dark:shadow-[inset_0_0_0_1px_rgba(249,115,22,0.3)]">
                       <Mail className="h-6 w-6" />
                     </div>
                     <div>
@@ -86,7 +86,7 @@ export default function QueriesPage() {
               </div>
 
               {/* FAQ Teaser */}
-              <div className="mt-auto rounded-3xl border border-gray-200/50 bg-white/40 p-8 backdrop-blur-xl dark:border-gray-800/50 dark:bg-gray-900/40">
+              <div className="group relative mt-auto overflow-hidden rounded-3xl border border-white/80 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-3xl transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:border-white/10 dark:bg-white/[0.02] dark:shadow-[0_8px_30px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.05)] dark:hover:bg-white/[0.04]">
                 <h3 className="mb-4 flex items-center gap-2 font-bold text-gray-900 dark:text-white">
                   <BookOpen className="h-5 w-5 text-orange-500" />
                   Common Topics
@@ -113,7 +113,7 @@ export default function QueriesPage() {
 
           {/* Form Section (Right) */}
           <ScrollReveal delay={0.1} className="h-full lg:col-span-3">
-            <div className="relative h-full rounded-3xl border border-gray-200/60 bg-white/60 p-8 shadow-2xl shadow-orange-500/5 backdrop-blur-2xl sm:p-10 dark:border-gray-800/60 dark:bg-gray-900/60">
+            <div className="group relative h-full overflow-hidden rounded-3xl border border-white/80 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-3xl transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] sm:p-10 dark:border-white/10 dark:bg-white/[0.02] dark:shadow-[0_8px_30px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.05)] dark:hover:bg-white/[0.04]">
               <QueryForm />
             </div>
           </ScrollReveal>
