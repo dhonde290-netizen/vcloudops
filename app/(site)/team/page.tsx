@@ -73,40 +73,48 @@ function Avatar({ name, size = 'md' }: { name: string; size?: 'md' | 'lg' }) {
 
 function MemberCard({ member }: { member: TeamMember }) {
   return (
-    <article className="group flex h-full flex-col items-center rounded-2xl border border-white/40 bg-white/40 p-6 text-center shadow-lg backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-white/60 hover:bg-white/50 dark:border-white/10 dark:bg-black/40 dark:hover:border-white/20 dark:hover:bg-black/50">
-      <div className="relative mb-2 transition-transform duration-300 group-hover:scale-105">
-        <Avatar name={member.name} />
-      </div>
-      <h2 className="mt-3 text-lg font-bold text-gray-900 transition-colors group-hover:text-orange-600 dark:text-white dark:group-hover:text-orange-400">
-        {member.name}
-      </h2>
-      <p className="mt-1 text-sm font-bold text-orange-600 dark:text-orange-400">{member.role}</p>
-      <p className="mt-1.5 text-xs font-medium text-gray-500 dark:text-gray-400">{member.year}</p>
+    <article className="group relative flex h-full flex-col items-center overflow-hidden rounded-[1.5rem] border border-white/60 bg-gradient-to-b from-white/60 to-white/30 p-6 text-center shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gray-900/5 dark:border-white/10 dark:from-white/10 dark:to-white/5 dark:hover:border-white/20 dark:hover:shadow-black/50">
+      {/* Dynamic Hover Glow */}
+      <div className="absolute inset-0 translate-y-[100%] bg-gradient-to-t from-orange-500/10 to-transparent opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 dark:from-orange-500/5" />
 
-      {/* Social links */}
-      <div className="mt-5 flex gap-4">
-        {member.linkedin && (
-          <a
-            href={member.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 transition-colors hover:text-blue-600 dark:text-gray-500 dark:hover:text-blue-400"
-            aria-label={`${member.name} on LinkedIn`}
-          >
-            <LinkedinIcon className="h-5 w-5" />
-          </a>
-        )}
-        {member.github && (
-          <a
-            href={member.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 transition-colors hover:text-gray-900 dark:text-gray-500 dark:hover:text-white"
-            aria-label={`${member.name} on GitHub`}
-          >
-            <GithubIcon className="h-5 w-5" />
-          </a>
-        )}
+      {/* Inner highlight */}
+      <div className="pointer-events-none absolute inset-0 rounded-[1.5rem] ring-1 ring-white/50 ring-inset dark:ring-white/10" />
+
+      <div className="relative z-10 flex h-full w-full flex-col items-center">
+        <div className="relative mb-2 transition-transform duration-300 group-hover:scale-105">
+          <Avatar name={member.name} />
+        </div>
+        <h2 className="mt-3 text-lg font-bold text-gray-900 transition-colors group-hover:text-orange-600 dark:text-white dark:group-hover:text-orange-400">
+          {member.name}
+        </h2>
+        <p className="mt-1 text-sm font-bold text-orange-600 dark:text-orange-400">{member.role}</p>
+        <p className="mt-1.5 text-xs font-medium text-gray-500 dark:text-gray-400">{member.year}</p>
+
+        {/* Social links */}
+        <div className="mt-5 flex gap-4">
+          {member.linkedin && (
+            <a
+              href={member.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 transition-colors hover:text-blue-600 dark:text-gray-500 dark:hover:text-blue-400"
+              aria-label={`${member.name} on LinkedIn`}
+            >
+              <LinkedinIcon className="h-5 w-5" />
+            </a>
+          )}
+          {member.github && (
+            <a
+              href={member.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 transition-colors hover:text-gray-900 dark:text-gray-500 dark:hover:text-white"
+              aria-label={`${member.name} on GitHub`}
+            >
+              <GithubIcon className="h-5 w-5" />
+            </a>
+          )}
+        </div>
       </div>
     </article>
   );

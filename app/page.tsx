@@ -29,11 +29,16 @@ import {
   Zap,
   GraduationCap,
   Megaphone,
-  Users,
-  BookOpen,
+  Ticket,
+  UsersRound,
+  MonitorPlay,
+  Gift,
+  CalendarRange,
+  Presentation,
+  BellRing,
+  Compass,
   Rocket,
-  HelpCircle,
-  Sparkles,
+  MessageCircleQuestion,
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -97,17 +102,17 @@ function UpcomingEventCard({ event }: { event: Event }) {
         <div className="mt-10 flex flex-wrap gap-4">
           <Link
             href={`/events/${event.slug}`}
-            className="group/btn flex items-center gap-2 rounded-full border border-orange-200 bg-white/80 px-7 py-3 text-sm font-bold text-orange-600 shadow-sm backdrop-blur-xl transition-all hover:border-orange-300 hover:bg-white hover:shadow-md focus:ring-2 focus:ring-orange-500 focus:outline-none dark:border-orange-800 dark:bg-black/50 dark:text-orange-400 dark:hover:bg-black/80"
+            className="group/btn flex items-center gap-2 rounded-full border border-white/60 bg-gradient-to-b from-white/60 to-white/30 px-7 py-3 text-sm font-bold text-orange-600 shadow-lg backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/80 hover:bg-white/50 hover:shadow-xl focus:ring-2 focus:ring-orange-500 focus:outline-none dark:border-white/10 dark:from-white/10 dark:to-white/5 dark:text-orange-400 dark:hover:border-white/20 dark:hover:bg-white/10"
           >
             View details
-            <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
           </Link>
           {event.registrationUrl && (
             <a
               href={event.registrationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full bg-orange-600 px-7 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-orange-700 hover:shadow-lg hover:shadow-orange-500/30 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none"
+              className="flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 px-7 py-3 text-sm font-bold text-white shadow-xl ring-1 shadow-orange-500/30 ring-white/20 transition-all duration-300 ring-inset hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/50 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none"
             >
               Register
               <ExternalLink className="h-4 w-4" />
@@ -119,48 +124,83 @@ function UpcomingEventCard({ event }: { event: Event }) {
   );
 }
 
-function UpdateCard({ update }: { update: ClubUpdate }) {
-  const typeInfo = UPDATE_TYPE_LABELS[update.type];
-  const Icon = {
-    winner: Trophy,
-    challenge: Zap,
-    workshop: GraduationCap,
-    announcement: Megaphone,
-  }[update.type];
+function LatestUpdatesTimeline({ updates }: { updates: ClubUpdate[] }) {
+  if (updates.length === 0) {
+    return (
+      <div className="relative overflow-hidden rounded-[2.5rem] border border-white/60 bg-gradient-to-b from-white/60 to-white/30 p-8 shadow-2xl backdrop-blur-xl sm:p-10 dark:border-white/10 dark:from-white/10 dark:to-white/5">
+        <p className="text-gray-500 dark:text-gray-400">No updates yet.</p>
+      </div>
+    );
+  }
 
   return (
-    <article className="group relative overflow-hidden rounded-[1.5rem] border border-white/60 bg-gradient-to-b from-white/60 to-white/30 p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gray-900/5 dark:border-white/10 dark:from-white/10 dark:to-white/5 dark:hover:border-white/20 dark:hover:shadow-black/50">
-      {/* Dynamic Hover Glow */}
-      <div className="absolute inset-0 translate-y-[100%] bg-gradient-to-t from-white/40 to-transparent opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 dark:from-white/5" />
+    <div className="relative flex h-full flex-col overflow-hidden rounded-[2.5rem] border border-white/60 bg-gradient-to-br from-white/80 to-white/30 p-8 shadow-2xl backdrop-blur-xl sm:p-10 dark:border-white/10 dark:from-white/10 dark:to-white/5">
+      {/* Decorative background glow */}
+      <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-orange-500/10 blur-[80px] dark:bg-orange-500/5" />
 
       {/* Inner highlight */}
-      <div className="pointer-events-none absolute inset-0 rounded-[1.5rem] ring-1 ring-white/50 ring-inset dark:ring-white/10" />
+      <div className="pointer-events-none absolute inset-0 rounded-[2.5rem] ring-1 ring-white/50 ring-inset dark:ring-white/10" />
 
-      <div className="relative z-10">
-        <div className="flex items-center justify-between">
-          <span
-            className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold shadow-sm backdrop-blur-md ${typeInfo.className}`}
+      <div className="relative z-10 flex h-full flex-col">
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="text-2xl font-black tracking-tight text-gray-900 dark:text-white">
+            Latest Updates
+          </h2>
+          <Link
+            href="/updates"
+            className="group flex items-center gap-1.5 rounded-full bg-white/50 px-4 py-2 text-sm font-bold text-orange-600 shadow-sm backdrop-blur-md transition-all hover:bg-white/80 hover:shadow-md dark:bg-white/5 dark:text-orange-400 dark:hover:bg-white/10"
           >
-            <Icon className="h-3.5 w-3.5" />
-            {typeInfo.label}
-          </span>
-          <span className="flex items-center gap-1.5 rounded-full border border-gray-200 bg-white/50 px-3 py-1.5 text-xs font-semibold text-gray-500 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-gray-400">
-            <Calendar className="h-3.5 w-3.5" />
-            {formatDate(update.date)}
-          </span>
+            See all
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </div>
 
-        <h3 className="mt-5 text-xl font-extrabold text-gray-900 drop-shadow-sm transition-colors group-hover:text-orange-600 dark:text-white dark:group-hover:text-orange-400">
-          <Link href={`/updates/${update.slug}`} className="before:absolute before:inset-0">
-            {update.title}
-          </Link>
-        </h3>
+        <div className="relative mt-2 flex-1">
+          {/* Timeline Line */}
+          <div className="absolute top-[32px] bottom-[24px] left-[11px] w-[3px] rounded-full bg-gradient-to-b from-orange-400 via-gray-200 to-transparent dark:via-gray-800" />
 
-        <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
-          {update.summary}
-        </p>
+          <ul className="space-y-10">
+            {updates.map((update) => {
+              const typeInfo = UPDATE_TYPE_LABELS[update.type];
+              const Icon = {
+                winner: Trophy,
+                challenge: Zap,
+                workshop: GraduationCap,
+                announcement: Megaphone,
+              }[update.type];
+
+              return (
+                <li key={update.slug} className="group relative pl-12">
+                  {/* Timeline Dot */}
+                  <div className="absolute top-1 left-[0px] flex h-6 w-6 items-center justify-center rounded-full border-4 border-white bg-orange-500 shadow-md transition-all duration-300 group-hover:scale-125 group-hover:border-orange-100 group-hover:bg-orange-600 dark:border-black dark:group-hover:border-gray-800" />
+
+                  <Link href={`/updates/${update.slug}`} className="block">
+                    <div className="mb-2 flex flex-wrap items-center gap-3">
+                      <span
+                        className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase shadow-sm backdrop-blur-md ${typeInfo.className}`}
+                      >
+                        <Icon className="h-3 w-3" />
+                        {typeInfo.label}
+                      </span>
+                      <span className="text-xs font-bold text-gray-400 dark:text-gray-500">
+                        {formatDate(update.date)}
+                      </span>
+                    </div>
+
+                    <h3 className="text-xl font-bold text-gray-900 transition-colors group-hover:text-orange-600 dark:text-white dark:group-hover:text-orange-400">
+                      {update.title}
+                    </h3>
+                    <p className="mt-2 line-clamp-2 text-sm leading-relaxed font-medium text-gray-600 dark:text-gray-300">
+                      {update.summary}
+                    </p>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
-    </article>
+    </div>
   );
 }
 
@@ -200,29 +240,8 @@ export default function HomePage() {
         </ScrollReveal>
 
         {/* Latest updates */}
-        <ScrollReveal className="lg:col-span-3" delay={0.2}>
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Latest Updates</h2>
-            <Link
-              href="/updates"
-              className="text-sm text-orange-600 hover:underline dark:text-orange-400"
-            >
-              See all →
-            </Link>
-          </div>
-          {latestUpdates.length > 0 ? (
-            <ul className="space-y-3" role="list">
-              {latestUpdates.map((u, i) => (
-                <ScrollReveal key={u.slug} delay={0.2 + i * 0.1}>
-                  <li>
-                    <UpdateCard update={u} />
-                  </li>
-                </ScrollReveal>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-gray-500 dark:text-gray-400">No updates yet.</p>
-          )}
+        <ScrollReveal className="h-full lg:col-span-3" delay={0.2}>
+          <LatestUpdatesTimeline updates={latestUpdates} />
         </ScrollReveal>
       </section>
 
@@ -230,23 +249,27 @@ export default function HomePage() {
       <section className="mt-20" aria-label="Club statistics">
         <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4" role="list">
           {[
-            { value: allEvents.length.toString(), label: 'Events this year', icon: Calendar },
-            { value: '80+', label: 'Active members', icon: Users },
-            { value: '3', label: 'Workshops held', icon: GraduationCap },
-            { value: '100%', label: 'Free for students', icon: Sparkles },
+            { value: allEvents.length.toString(), label: 'Events this year', icon: Ticket },
+            { value: '80+', label: 'Active members', icon: UsersRound },
+            { value: '3', label: 'Workshops held', icon: MonitorPlay },
+            { value: '100%', label: 'Free for students', icon: Gift },
           ].map(({ value, label, icon: Icon }, i) => (
             <ScrollReveal key={label} delay={i * 0.1}>
-              <li className="group relative overflow-hidden rounded-2xl border border-white/40 bg-white/40 p-6 text-center shadow-lg backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-white/60 hover:bg-white/50 dark:border-white/10 dark:bg-black/40 dark:hover:border-white/20 dark:hover:bg-black/50">
+              <li className="group relative overflow-hidden rounded-[1.5rem] border border-white/60 bg-gradient-to-b from-white/60 to-white/30 p-6 text-center shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gray-900/5 dark:border-white/10 dark:from-white/10 dark:to-white/5 dark:hover:border-white/20 dark:hover:shadow-black/50">
+                {/* Dynamic Hover Glow */}
+                <div className="absolute inset-0 translate-y-[100%] bg-gradient-to-t from-orange-500/10 to-transparent opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 dark:from-orange-500/5" />
+
+                {/* Inner highlight */}
+                <div className="pointer-events-none absolute inset-0 rounded-[1.5rem] ring-1 ring-white/50 ring-inset dark:ring-white/10" />
+
                 <div className="relative z-10 flex flex-col items-center justify-center">
-                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100 text-orange-600 dark:bg-orange-500/20 dark:text-orange-400">
-                    <Icon className="h-6 w-6" />
+                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-500/30 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
+                    <Icon className="h-7 w-7" />
                   </div>
-                  <p className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+                  <p className="text-4xl font-extrabold tracking-tight text-gray-900 drop-shadow-sm dark:text-white">
                     {value}
                   </p>
-                  <p className="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                    {label}
-                  </p>
+                  <p className="mt-2 text-sm font-bold text-gray-600 dark:text-gray-400">{label}</p>
                 </div>
               </li>
             </ScrollReveal>
@@ -255,59 +278,86 @@ export default function HomePage() {
       </section>
 
       {/* ── Quick links grid ──────────────────────────────────────────── */}
-      <section className="mt-20" aria-labelledby="quicklinks-heading">
+      <section className="mt-24" aria-labelledby="quicklinks-heading">
         <ScrollFade>
-          <h2
-            id="quicklinks-heading"
-            className="mb-8 text-center text-2xl font-bold text-gray-900 dark:text-white"
-          >
-            Everything in one place
-          </h2>
+          <div className="mb-10 text-center">
+            <h2
+              id="quicklinks-heading"
+              className="text-3xl font-extrabold tracking-tight text-gray-900 drop-shadow-sm dark:text-white"
+            >
+              Everything in one place
+            </h2>
+            <p className="mt-3 text-sm font-medium text-gray-600 dark:text-gray-400">
+              Quick access to resources, events, and help.
+            </p>
+          </div>
         </ScrollFade>
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4" role="list">
+        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-3" role="list">
           {[
             {
               href: '/events',
               label: 'Events',
-              desc: 'Upcoming workshops & meetups',
-              icon: Calendar,
+              desc: 'Meetups & challenges',
+              icon: CalendarRange,
+              color: 'from-orange-500 to-amber-500',
             },
             {
               href: '/workshops',
               label: 'Workshops',
-              desc: 'Recordings, slides & notes',
-              icon: GraduationCap,
+              desc: 'Recordings & notes',
+              icon: Presentation,
+              color: 'from-blue-500 to-cyan-500',
             },
             {
               href: '/updates',
               label: 'Updates',
-              desc: 'Winners, challenges & news',
-              icon: Megaphone,
+              desc: 'Winners & news',
+              icon: BellRing,
+              color: 'from-green-500 to-emerald-500',
             },
-            { href: '/guides', label: 'Guides', desc: 'AWS setup how-tos', icon: BookOpen },
-            { href: '/team', label: 'Team', desc: 'Meet the core team', icon: Users },
+            {
+              href: '/guides',
+              label: 'Guides',
+              desc: 'AWS setups',
+              icon: Compass,
+              color: 'from-purple-500 to-fuchsia-500',
+            },
+            {
+              href: '/team',
+              label: 'Team',
+              desc: 'Meet the core',
+              icon: Rocket,
+              color: 'from-rose-500 to-pink-500',
+            },
             {
               href: '/queries',
-              label: 'Ask a Query',
-              desc: 'Get help from the team',
-              icon: HelpCircle,
+              label: 'Query',
+              desc: 'Ask for help',
+              icon: MessageCircleQuestion,
+              color: 'from-indigo-500 to-violet-500',
             },
-          ].map(({ href, label, desc, icon: Icon }, i) => (
+          ].map(({ href, label, desc, icon: Icon, color }, i) => (
             <ScrollReveal key={href} delay={i * 0.1}>
               <li>
                 <Link
                   href={href}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/40 bg-white/40 p-6 shadow-lg backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-white/60 hover:bg-white/50 dark:border-white/10 dark:bg-black/40 dark:hover:border-white/20 dark:hover:bg-black/50"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-white/60 bg-gradient-to-b from-white/60 to-white/30 p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gray-900/5 dark:border-white/10 dark:from-white/10 dark:to-white/5 dark:hover:border-white/20 dark:hover:shadow-black/50"
                 >
-                  <div className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-[100%]" />
-                  <div className="relative z-10">
-                    <div className="mb-4 inline-flex rounded-lg bg-orange-100 p-2.5 text-orange-600 transition-colors group-hover:bg-orange-600 group-hover:text-white dark:bg-orange-500/20 dark:text-orange-400 dark:group-hover:bg-orange-500 dark:group-hover:text-white">
-                      <Icon className="h-5 w-5" />
+                  <div className="absolute inset-0 translate-y-[100%] bg-gradient-to-t from-white/40 to-transparent opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 dark:from-white/5" />
+
+                  {/* Inner highlight */}
+                  <div className="pointer-events-none absolute inset-0 rounded-[1.5rem] ring-1 ring-white/50 ring-inset dark:ring-white/10" />
+
+                  <div className="relative z-10 flex flex-col items-center text-center">
+                    <div
+                      className={`mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${color} text-white shadow-lg shadow-black/10 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6`}
+                    >
+                      <Icon className="h-7 w-7" />
                     </div>
-                    <span className="block text-lg font-bold text-gray-900 dark:text-white">
+                    <span className="block text-lg font-extrabold text-gray-900 drop-shadow-sm dark:text-white">
                       {label}
                     </span>
-                    <span className="mt-2 block text-sm font-medium text-gray-600 dark:text-gray-400">
+                    <span className="mt-1.5 block text-sm font-semibold text-gray-600 dark:text-gray-400">
                       {desc}
                     </span>
                   </div>

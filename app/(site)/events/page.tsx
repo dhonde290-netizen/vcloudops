@@ -18,66 +18,74 @@ function EventCard({ event }: { event: Event }) {
   const typeInfo = EVENT_TYPE_LABELS[event.type];
 
   return (
-    <article className="group rounded-2xl border border-white/40 bg-white/40 p-6 shadow-lg backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-white/60 hover:bg-white/50 dark:border-white/10 dark:bg-black/40 dark:hover:border-white/20 dark:hover:bg-black/50">
-      {/* Type badge */}
-      <div className="mb-4 flex flex-wrap items-center gap-2">
-        <span
-          className={`rounded-full px-3 py-1 text-[10px] font-bold tracking-wider uppercase ${typeInfo.className}`}
-        >
-          {typeInfo.label}
-        </span>
-        {event.registrationUrl && (
-          <span className="relative flex items-center gap-1.5 rounded-full bg-orange-100 px-3 py-1 text-[10px] font-bold tracking-wider text-orange-700 uppercase dark:bg-orange-500/20 dark:text-orange-400">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-orange-500"></span>
-            </span>
-            Registration open
-          </span>
-        )}
-      </div>
+    <article className="group relative overflow-hidden rounded-[1.5rem] border border-white/60 bg-gradient-to-b from-white/60 to-white/30 p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gray-900/5 dark:border-white/10 dark:from-white/10 dark:to-white/5 dark:hover:border-white/20 dark:hover:shadow-black/50">
+      {/* Dynamic Hover Glow */}
+      <div className="absolute inset-0 translate-y-[100%] bg-gradient-to-t from-orange-500/10 to-transparent opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 dark:from-orange-500/5" />
 
-      {/* Title */}
-      <h2 className="text-xl font-bold tracking-tight text-gray-900 transition-colors group-hover:text-orange-600 sm:text-2xl dark:text-white dark:group-hover:text-orange-400">
-        <Link
-          href={`/events/${event.slug}`}
-          className="focus-visible:underline focus-visible:outline-none"
-        >
-          {event.title}
-        </Link>
-      </h2>
+      {/* Inner highlight */}
+      <div className="pointer-events-none absolute inset-0 rounded-[1.5rem] ring-1 ring-white/50 ring-inset dark:ring-white/10" />
 
-      {/* Date + location */}
-      <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
-        <div className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          <CalendarIcon className="h-4 w-4 text-orange-500" />
-          <span>{formatDateTime(event.date)}</span>
-        </div>
-        <div className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          <MapPin className="h-4 w-4 text-orange-500" />
-          <span>{event.location}</span>
-        </div>
-      </div>
-
-      <div className="mt-6 flex flex-wrap gap-3">
-        <Link
-          href={`/events/${event.slug}`}
-          className="group/btn flex items-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-sm font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:ring-2 focus:ring-gray-200 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:text-gray-300 dark:hover:bg-white/10"
-        >
-          View details
-          <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
-        </Link>
-        {event.registrationUrl && (
-          <a
-            href={event.registrationUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group/btn flex items-center gap-2 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 px-5 py-2 text-sm font-bold text-white shadow-md shadow-orange-500/25 transition-all hover:scale-105 hover:shadow-lg hover:shadow-orange-500/40 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+      <div className="relative z-10 flex h-full flex-col">
+        {/* Type badge */}
+        <div className="mb-4 flex flex-wrap items-center gap-3">
+          <span
+            className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold shadow-sm backdrop-blur-md ${typeInfo.className}`}
           >
-            Register
-            <ExternalLink className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-          </a>
-        )}
+            {typeInfo.label}
+          </span>
+          {event.registrationUrl && (
+            <span className="relative flex items-center gap-1.5 rounded-full bg-orange-100 px-3 py-1 text-[10px] font-bold tracking-wider text-orange-700 uppercase dark:bg-orange-500/20 dark:text-orange-400">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-orange-500"></span>
+              </span>
+              Registration open
+            </span>
+          )}
+        </div>
+
+        {/* Title */}
+        <h2 className="text-xl font-bold tracking-tight text-gray-900 transition-colors group-hover:text-orange-600 sm:text-2xl dark:text-white dark:group-hover:text-orange-400">
+          <Link
+            href={`/events/${event.slug}`}
+            className="focus-visible:underline focus-visible:outline-none"
+          >
+            {event.title}
+          </Link>
+        </h2>
+
+        {/* Date + location */}
+        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
+          <div className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+            <CalendarIcon className="h-4 w-4 text-orange-500" />
+            <span>{formatDateTime(event.date)}</span>
+          </div>
+          <div className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+            <MapPin className="h-4 w-4 text-orange-500" />
+            <span>{event.location}</span>
+          </div>
+        </div>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href={`/events/${event.slug}`}
+            className="group/btn flex items-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-sm font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:ring-2 focus:ring-gray-200 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:text-gray-300 dark:hover:bg-white/10"
+          >
+            View details
+            <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
+          </Link>
+          {event.registrationUrl && (
+            <a
+              href={event.registrationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/btn flex items-center gap-2 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 px-5 py-2 text-sm font-bold text-white shadow-md shadow-orange-500/25 transition-all hover:scale-105 hover:shadow-lg hover:shadow-orange-500/40 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+            >
+              Register
+              <ExternalLink className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+            </a>
+          )}
+        </div>
       </div>
     </article>
   );

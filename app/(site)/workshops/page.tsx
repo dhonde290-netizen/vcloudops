@@ -60,60 +60,68 @@ export default function WorkshopsPage() {
             <li className="h-full">
               <Link
                 href={`/workshops/${workshop.slug}`}
-                className="group flex h-full flex-col rounded-2xl border border-white/40 bg-white/40 p-6 shadow-lg backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-white/60 hover:bg-white/50 dark:border-white/10 dark:bg-black/40 dark:hover:border-white/20 dark:hover:bg-black/50"
+                className="group relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-white/60 bg-gradient-to-b from-white/60 to-white/30 p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gray-900/5 dark:border-white/10 dark:from-white/10 dark:to-white/5 dark:hover:border-white/20 dark:hover:shadow-black/50"
               >
-                {/* Recording status badge */}
-                <div className="mb-4">
-                  {workshop.recordingUrl ? (
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold tracking-wider text-green-700 uppercase dark:bg-green-500/20 dark:text-green-400">
-                      <PlayCircle className="h-3.5 w-3.5" />
-                      Recording available
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-white/50 px-3 py-1 text-[10px] font-bold tracking-wider text-gray-500 uppercase dark:border-white/10 dark:bg-white/5 dark:text-gray-400">
-                      <Hourglass className="h-3.5 w-3.5" />
-                      Recording coming soon
-                    </span>
-                  )}
-                </div>
+                {/* Dynamic Hover Glow */}
+                <div className="absolute inset-0 translate-y-[100%] bg-gradient-to-t from-orange-500/10 to-transparent opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 dark:from-orange-500/5" />
 
-                {/* Title */}
-                <h2 className="text-xl font-bold tracking-tight text-gray-900 transition-colors group-hover:text-orange-600 dark:text-white dark:group-hover:text-orange-400">
-                  {workshop.title}
-                </h2>
+                {/* Inner highlight */}
+                <div className="pointer-events-none absolute inset-0 rounded-[1.5rem] ring-1 ring-white/50 ring-inset dark:ring-white/10" />
 
-                {/* Speaker + date */}
-                <p className="mt-2 text-sm font-medium text-gray-500 dark:text-gray-400">
-                  {workshop.speaker} <span className="mx-1">•</span>{' '}
-                  {new Date(workshop.date).toLocaleDateString('en-IN', {
-                    day: 'numeric',
-                    month: 'short',
-                    year: 'numeric',
-                  })}
-                </p>
-
-                {/* Summary */}
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-                  {workshop.summary}
-                </p>
-
-                {/* Tags */}
-                {workshop.tags.length > 0 && (
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {workshop.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md bg-orange-100 px-2 py-1 text-[10px] font-bold tracking-wider text-orange-700 uppercase dark:bg-orange-500/20 dark:text-orange-400"
-                      >
-                        {tag}
+                <div className="relative z-10 flex h-full flex-col">
+                  {/* Recording status badge */}
+                  <div className="mb-4">
+                    {workshop.recordingUrl ? (
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1.5 text-xs font-bold text-green-700 shadow-sm backdrop-blur-md dark:bg-green-500/20 dark:text-green-400">
+                        <PlayCircle className="h-4 w-4" />
+                        Recording available
                       </span>
-                    ))}
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-white/50 px-3 py-1.5 text-xs font-bold text-gray-500 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-gray-400">
+                        <Hourglass className="h-4 w-4" />
+                        Recording coming soon
+                      </span>
+                    )}
                   </div>
-                )}
 
-                <div className="mt-6 flex items-center gap-2 text-sm font-bold text-orange-600 transition-colors group-hover:text-orange-700 dark:text-orange-500 dark:group-hover:text-orange-400">
-                  View notes & resources
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  {/* Title */}
+                  <h2 className="text-xl font-bold tracking-tight text-gray-900 transition-colors group-hover:text-orange-600 dark:text-white dark:group-hover:text-orange-400">
+                    {workshop.title}
+                  </h2>
+
+                  {/* Speaker + date */}
+                  <p className="mt-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+                    {workshop.speaker} <span className="mx-1">•</span>{' '}
+                    {new Date(workshop.date).toLocaleDateString('en-IN', {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                    })}
+                  </p>
+
+                  {/* Summary */}
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                    {workshop.summary}
+                  </p>
+
+                  {/* Tags */}
+                  {workshop.tags.length > 0 && (
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {workshop.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-md bg-orange-100 px-2 py-1 text-[10px] font-bold tracking-wider text-orange-700 uppercase dark:bg-orange-500/20 dark:text-orange-400"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="mt-6 flex items-center gap-2 text-sm font-bold text-orange-600 transition-colors group-hover:text-orange-700 dark:text-orange-500 dark:group-hover:text-orange-400">
+                    View notes & resources
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </div>
                 </div>
               </Link>
             </li>
