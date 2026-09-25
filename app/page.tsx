@@ -47,54 +47,67 @@ export const dynamic = 'force-dynamic';
 function UpcomingEventCard({ event }: { event: Event }) {
   const typeInfo = EVENT_TYPE_LABELS[event.type];
   return (
-    <div className="group relative overflow-hidden rounded-3xl border border-white/40 bg-white/40 p-8 shadow-2xl backdrop-blur-xl transition-all hover:border-white/60 hover:bg-white/50 dark:border-white/10 dark:bg-black/40 dark:hover:border-white/20 dark:hover:bg-black/50">
+    <div className="group relative overflow-hidden rounded-[2rem] border border-white/60 bg-gradient-to-br from-white/80 to-white/30 p-8 shadow-2xl backdrop-blur-xl transition-all duration-500 hover:shadow-orange-500/20 sm:p-10 dark:border-white/10 dark:from-white/10 dark:to-white/5">
       {/* Decorative blurred blobs */}
-      <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-orange-500/30 blur-3xl transition-transform duration-700 group-hover:scale-125 dark:bg-orange-600/20" />
-      <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-amber-500/20 blur-3xl transition-transform duration-700 group-hover:scale-125 dark:bg-amber-600/10" />
+      <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-orange-500/30 blur-[100px] transition-transform duration-1000 group-hover:scale-125 dark:bg-orange-500/20" />
+      <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-blue-500/20 blur-[100px] transition-transform duration-1000 group-hover:scale-125 dark:bg-blue-500/10" />
+
+      {/* Subtle Grid Pattern Overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] [mask-image:linear-gradient(to_bottom,white,transparent)] bg-[size:24px_24px] dark:bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)]" />
+
+      {/* Inner highlight for 3D glassy edge */}
+      <div className="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-white/50 ring-inset dark:ring-white/10" />
 
       {/* Decorative Icon */}
-      <div className="absolute top-6 right-6 text-orange-500 opacity-10 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12 dark:opacity-20">
-        <Calendar className="h-24 w-24" />
+      <div className="absolute -top-4 -right-4 text-orange-500 opacity-[0.03] transition-transform duration-700 group-hover:scale-110 group-hover:rotate-12 dark:opacity-10">
+        <Calendar className="h-48 w-48" />
       </div>
 
-      <div className="relative z-10">
-        <p className="mb-2 text-sm font-bold tracking-widest text-orange-600 uppercase dark:text-orange-400">
-          Next up
-        </p>
-        <span
-          className={`inline-block rounded-full px-3 py-1 text-xs font-semibold shadow-sm ${typeInfo.className}`}
-        >
-          {typeInfo.label}
-        </span>
-        <h2 className="mt-4 text-3xl leading-tight font-extrabold tracking-tight text-gray-900 dark:text-white">
+      <div className="relative z-10 flex h-full flex-col">
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
+          <p className="flex items-center gap-2.5 text-sm font-bold tracking-widest text-orange-600 uppercase dark:text-orange-400">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-500 opacity-75"></span>
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-orange-500"></span>
+            </span>
+            Next Up
+          </p>
+          <span
+            className={`inline-flex items-center rounded-full px-3 py-1.5 text-xs font-bold shadow-sm backdrop-blur-md ${typeInfo.className}`}
+          >
+            {typeInfo.label}
+          </span>
+        </div>
+
+        <h2 className="mt-auto mb-2 text-3xl leading-tight font-extrabold tracking-tight text-gray-900 drop-shadow-sm sm:text-4xl md:text-5xl dark:text-white">
           {event.title}
         </h2>
 
-        <div className="mt-5 flex flex-col gap-3 text-sm font-medium text-gray-700 sm:flex-row sm:items-center sm:gap-6 dark:text-gray-300">
-          <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/50 px-3 py-1.5 backdrop-blur-md dark:border-white/5 dark:bg-black/30">
+        <div className="mt-8 flex flex-col items-start gap-3 text-sm font-medium text-gray-700 sm:flex-row sm:items-center sm:gap-4 dark:text-gray-300">
+          <div className="flex w-fit items-center gap-2.5 rounded-full border border-gray-200 bg-white/50 px-4 py-2 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-gray-200">
             <Calendar className="h-4 w-4 text-orange-500" />
             <span>{formatDateTime(event.date)}</span>
           </div>
-          <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/50 px-3 py-1.5 backdrop-blur-md dark:border-white/5 dark:bg-black/30">
+          <div className="flex w-fit items-center gap-2.5 rounded-full border border-gray-200 bg-white/50 px-4 py-2 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-gray-200">
             <MapPin className="h-4 w-4 text-orange-500" />
             <span>{event.location}</span>
           </div>
         </div>
 
-        <div className="mt-8 flex flex-wrap gap-4">
+        <div className="mt-10 flex flex-wrap gap-4">
           <Link
             href={`/events/${event.slug}`}
-            className="flex items-center gap-2 rounded-full border border-orange-200 bg-white/50 px-6 py-2.5 text-sm font-semibold text-orange-600 shadow-sm backdrop-blur-md transition-all hover:bg-orange-50 focus:ring-2 focus:ring-orange-500 focus:outline-none dark:border-orange-800 dark:bg-black/50 dark:text-orange-400 dark:hover:bg-gray-800"
+            className="group/btn flex items-center gap-2 rounded-full border border-orange-200 bg-white/80 px-7 py-3 text-sm font-bold text-orange-600 shadow-sm backdrop-blur-xl transition-all hover:border-orange-300 hover:bg-white hover:shadow-md focus:ring-2 focus:ring-orange-500 focus:outline-none dark:border-orange-800 dark:bg-black/50 dark:text-orange-400 dark:hover:bg-black/80"
           >
             View details
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
           </Link>
           {event.registrationUrl && (
             <a
               href={event.registrationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full bg-orange-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-orange-700 hover:shadow-lg focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none"
+              className="flex items-center gap-2 rounded-full bg-orange-600 px-7 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-orange-700 hover:shadow-lg hover:shadow-orange-500/30 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none"
             >
               Register
               <ExternalLink className="h-4 w-4" />
@@ -116,27 +129,34 @@ function UpdateCard({ update }: { update: ClubUpdate }) {
   }[update.type];
 
   return (
-    <article className="group relative overflow-hidden rounded-2xl border border-white/40 bg-white/40 p-5 shadow-lg backdrop-blur-lg transition-all hover:-translate-y-1 hover:border-white/60 hover:bg-white/50 dark:border-white/10 dark:bg-black/40 dark:hover:border-white/20 dark:hover:bg-black/50">
-      <div className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-[100%]" />
+    <article className="group relative overflow-hidden rounded-[1.5rem] border border-white/60 bg-gradient-to-b from-white/60 to-white/30 p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gray-900/5 dark:border-white/10 dark:from-white/10 dark:to-white/5 dark:hover:border-white/20 dark:hover:shadow-black/50">
+      {/* Dynamic Hover Glow */}
+      <div className="absolute inset-0 translate-y-[100%] bg-gradient-to-t from-white/40 to-transparent opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 dark:from-white/5" />
+
+      {/* Inner highlight */}
+      <div className="pointer-events-none absolute inset-0 rounded-[1.5rem] ring-1 ring-white/50 ring-inset dark:ring-white/10" />
 
       <div className="relative z-10">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between">
           <span
-            className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold shadow-sm ${typeInfo.className}`}
+            className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold shadow-sm backdrop-blur-md ${typeInfo.className}`}
           >
             <Icon className="h-3.5 w-3.5" />
             {typeInfo.label}
           </span>
-          <span className="ml-auto rounded-full border border-white/20 bg-white/50 px-2.5 py-1 text-xs font-medium text-gray-500 backdrop-blur-md dark:border-white/5 dark:bg-black/30 dark:text-gray-400">
+          <span className="flex items-center gap-1.5 rounded-full border border-gray-200 bg-white/50 px-3 py-1.5 text-xs font-semibold text-gray-500 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-gray-400">
+            <Calendar className="h-3.5 w-3.5" />
             {formatDate(update.date)}
           </span>
         </div>
-        <h3 className="mt-3 text-lg font-bold text-gray-900 transition-colors group-hover:text-orange-600 dark:text-white dark:group-hover:text-orange-400">
+
+        <h3 className="mt-5 text-xl font-extrabold text-gray-900 drop-shadow-sm transition-colors group-hover:text-orange-600 dark:text-white dark:group-hover:text-orange-400">
           <Link href={`/updates/${update.slug}`} className="before:absolute before:inset-0">
             {update.title}
           </Link>
         </h3>
-        <p className="mt-2 line-clamp-2 text-sm text-gray-600 dark:text-gray-300">
+
+        <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
           {update.summary}
         </p>
       </div>

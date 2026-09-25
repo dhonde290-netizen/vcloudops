@@ -308,19 +308,23 @@ export const EVENT_TYPE_LABELS: Record<
 > = {
   workshop: {
     label: 'Workshop',
-    className: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+    className:
+      'border border-blue-500/30 bg-blue-500/10 text-blue-700 dark:border-blue-400/20 dark:bg-blue-400/10 dark:text-blue-300',
   },
   session: {
     label: 'Session',
-    className: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
+    className:
+      'border border-purple-500/30 bg-purple-500/10 text-purple-700 dark:border-purple-400/20 dark:bg-purple-400/10 dark:text-purple-300',
   },
   challenge: {
     label: 'Challenge',
-    className: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
+    className:
+      'border border-green-500/30 bg-green-500/10 text-green-700 dark:border-green-400/20 dark:bg-green-400/10 dark:text-green-300',
   },
   meetup: {
     label: 'Meetup',
-    className: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
+    className:
+      'border border-orange-500/30 bg-orange-500/10 text-orange-700 dark:border-orange-400/20 dark:bg-orange-400/10 dark:text-orange-300',
   },
 };
 
@@ -330,18 +334,22 @@ export const UPDATE_TYPE_LABELS: Record<
 > = {
   winner: {
     label: 'Winner',
-    className: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+    className:
+      'border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-300',
   },
   challenge: {
     label: 'Challenge',
-    className: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
+    className:
+      'border border-green-500/30 bg-green-500/10 text-green-700 dark:border-green-400/20 dark:bg-green-400/10 dark:text-green-300',
   },
   workshop: {
     label: 'Workshop',
-    className: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+    className:
+      'border border-blue-500/30 bg-blue-500/10 text-blue-700 dark:border-blue-400/20 dark:bg-blue-400/10 dark:text-blue-300',
   },
   announcement: {
     label: 'Announcement',
-    className: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
+    className:
+      'border border-orange-500/30 bg-orange-500/10 text-orange-700 dark:border-orange-400/20 dark:bg-orange-400/10 dark:text-orange-300',
   },
 };
